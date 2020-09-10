@@ -1,0 +1,50 @@
+
+
+<div>
+
+    <mat-form-field class="datepicker" appearance="fill">
+        <mat-label>Data de Movimento</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      
+
+    <button mat-raised-button (click)="consultar()" color="primary"> Consultar </button>
+
+
+    <table mat-table class="table row-border hover responsive" datatable [dtOptions]="dtOptions">
+        <thead>
+        <tr>
+            <th>Fundo</th>
+            <th>Drive</th>
+            <th>Divisao</th>
+            <th>Tipo</th>
+            <th>Inicio</th>
+            <th>PL</th>
+            <th>Limite</th>
+            <th>Consumo</th>
+            <th>Data Movimento</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ocorrencia of ocorrencias">
+            <td>{{ocorrencia.fundo}}</td>
+            <td>{{ocorrencia.drive}}</td>
+            <td>{{ocorrencia.divisao}}</td>
+            <td>{{ocorrencia.tipolimite}}</td>
+            <td>{{ocorrencia.abertaEm  |  date:'yyyy-MM-dd' }}</td>
+            <td>{{ocorrencia.pl}}</td>
+            <td>{{ocorrencia.limite}}</td>
+            <td>{{ocorrencia.consumo}}</td>
+            <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
+            <td>  <button mat-stroked-button color="primary" (click)="tratarOcorrencia()">Tratar</button>   </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
