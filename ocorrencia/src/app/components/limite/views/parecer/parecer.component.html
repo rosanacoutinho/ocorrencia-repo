@@ -1,0 +1,85 @@
+<mat-card >
+    <mat-card-header>
+        <div mat-card-avatar ></div>
+        <mat-card-title> Parecer </mat-card-title>
+    </mat-card-header> 
+
+    <mat-card-content>
+
+        <mat-grid-list cols="3" rowHeight="2:1"  >
+            <mat-grid-tile  colspan="2">
+  
+                <div class="container flex">
+                  <div class="item">
+
+                    <mat-form-field >
+                        <mat-label>Prazo</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="dataPrazo"  [ngModelOptions]="{standalone: true}"  disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                      </mat-form-field>   
+
+                  </div>
+                  <div class="item">
+                    <mat-form-field >
+                      <mat-label>Tipo</mat-label>
+                      <mat-select [(value)]="tipoSelected">
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+                            {{tipo}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                
+                  <div class="item-parecer ">
+                    <form class="example-form">
+                                           
+                    <mat-form-field class="areaParecer">
+                          <mat-label>Parecer</mat-label>
+                          <textarea class="areaParecer" [(value)]="parecer" matInput rows="7"  placeholder="Insira seu texto aqui" required minlength="4"></textarea>
+                        </mat-form-field>
+                      </form>
+                  </div>
+                </div>
+  
+            </mat-grid-tile>
+            <mat-grid-tile  colspan="1">
+                
+                <mat-card  class="contingenciaCard" *ngIf= 'tipoSelected === "REGISTRO_CONTIGENCIA" '>
+                    <mat-card-header>
+                        <div mat-card-avatar ></div>
+                        <mat-card-title> Contigencia </mat-card-title>
+                      </mat-card-header>            
+                      <mat-card-content>
+                       
+
+                        <form class="example-form">
+                                           
+                          <table class="full-width" cellspacing="0">
+                            <tr>
+                              <br>
+                              <td><mat-form-field class="full-width">
+                                <mat-label>PL</mat-label>
+                                <input matInput >
+                              </mat-form-field></td>
+                            </tr>
+                            <tr>
+                              <br>
+                              <td><mat-form-field class="full-width">
+                                <mat-label>VaR</mat-label>
+                                <input matInput>
+                              </mat-form-field></td>
+                            </tr>
+                          </table>
+                        </form>
+
+                      </mat-card-content>
+                </mat-card>
+
+            </mat-grid-tile>
+          </mat-grid-list>
+
+    </mat-card-content>
+</mat-card>
+
+{{parecer}}

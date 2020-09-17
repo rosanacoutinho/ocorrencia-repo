@@ -1,8 +1,8 @@
 
 import { OcorrenciaLimiteService } from '../../services/ocorrencia-limite.service';
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Ocorrencia } from '../../models/ocorrencia.model';
 
 
@@ -13,28 +13,40 @@ import { Ocorrencia } from '../../models/ocorrencia.model';
 })
 export class AcompanhamentoComponent implements OnInit {
 
+  title = 'Acompanhamento de extrapolações de Limite de Fundos';
+  
+  dataInicio : string
+  dataFim : string
+
   ocorrencias: Ocorrencia[]
 
   constructor(private ocorrenciaLimiteService: OcorrenciaLimiteService, 
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
+
 
 
 
 buscar(){  
+  console.log(this.dataInicio)
+  console.log(this.dataFim)
+  let dataInicio = this.dataInicio
+  let dataFim = this.dataFim
   this.ocorrencias = [];
-  this.ocorrenciaLimiteService.showMessage('carregando tabela');
-  this.getOcorrencias()
+  //this.ocorrenciaLimiteService.showMessage('carregando tabela');
+  this.getOcorrenciasPeriodo(dataInicio, dataFim)
 }
 
-detalharOcorrencia(){
-  this.router.navigate(['/limite/detalhamento'])
+detalharOcorrencia(ocorrencia: Ocorrencia){  
+  let ocorrenciaJson = JSON.stringify({ ocorrencia });
+  let ocorrenciasJson = JSON.stringify( this.ocorrencias );
+  this.router.navigate(['/limite/detalhamento', {o : ocorrenciaJson, os : ocorrenciasJson }]) 
 }
 
-  /*Metodo aciona servicco para buscar ocorrencias via http*/ 
-getOcorrencias(){
+
+getOcorrenciasPeriodo(dataInicio, dataFim){
   this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => {
     this.ocorrencias= ocorrencias
-    console.log(ocorrencias)
   })
 }
 
@@ -42,6 +54,8 @@ getOcorrencias(){
 dtOptions: any = {};
 
   ngOnInit(): void {
+
+
   /*opcoes da dataTable*/ 
   this.dtOptions = {
     pagingType: 'full_numbers',
@@ -49,10 +63,8 @@ dtOptions: any = {};
      dom: 'Bfrtip',
      buttons: [
        'excel',
-       //'print', 
        'copy',
        'csv'
-       //'colvis'
      ],
      language: {
        emptyTable: "Nenhum registro encontrado",
@@ -74,6 +86,12 @@ dtOptions: any = {};
      }
    
    };
+
+ 
+    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
+   
+   
 }
+
 
 }

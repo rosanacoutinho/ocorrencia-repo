@@ -1,0 +1,7 @@
+{  
+    "/api/*": {  
+       "target": "http://pxl1rwtbr001.df.intrabb.bb.com.br:8097",  
+       "secure": false,  
+       "logLevel": "debug"  
+    }  
+ } 

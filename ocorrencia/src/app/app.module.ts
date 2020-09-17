@@ -4,11 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataTablesModule } from 'angular-datatables';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/template/header/header.component';
 import { FooterComponent } from './components/template/footer/footer.component';
 import { RelatorioComponent } from './components/limite/views/relatorio/relatorio.component';
+import { TratamentoComponent } from './components/limite/views/tratamento/tratamento.component';
+import { AcompanhamentoComponent } from './components/limite/views/acompanhamento/acompanhamento.component'; 
+import { DetalhamentoComponent } from './components/limite/views/detalhamento/detalhamento.component'
+
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,15 +23,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { TratamentoComponent } from './components/limite/views/tratamento/tratamento.component';
-import { AcompanhamentoComponent } from './components/limite/views/acompanhamento/acompanhamento.component'; 
-
-import { HttpClientModule } from '@angular/common/http';
-import { DetalhamentoComponent } from './components/limite/views/detalhamento/detalhamento.component'
-
+import { MatCardModule } from '@angular/material/card'; 
+import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ParecerComponent } from './components/limite/views/parecer/parecer.component';
+import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'; 
 
 
 @NgModule({
@@ -36,6 +43,8 @@ import { DetalhamentoComponent } from './components/limite/views/detalhamento/de
     TratamentoComponent,
     AcompanhamentoComponent,
     DetalhamentoComponent,
+    ParecerComponent,
+    VisualizacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,15 +57,20 @@ import { DetalhamentoComponent } from './components/limite/views/detalhamento/de
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule ,
+    MatSelectModule ,
+    MatGridListModule
   ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule ,
-    MatFormFieldModule
+    MatFormFieldModule,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

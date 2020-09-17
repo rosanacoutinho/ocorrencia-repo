@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Ocorrencia } from '../../models/ocorrencia.model';
+import { ParecerComponent } from '../parecer/parecer.component'
+
+
 
 @Component({
   selector: 'app-tratamento',
@@ -8,31 +13,44 @@ import { Router } from '@angular/router';
 })
 export class TratamentoComponent implements OnInit {
 
-  constructor( private router: Router ) { }
 
-  ocorrencia = {
-    "id": 18682  ,
-    "dataMovimento": "02/09/2020",
-    "fundo": "BRPREV TOP CAMBIALFI ",
-    "divisao": "fundos Multimercados",
-    "drive": 6229,
-    "tipolimite": "TRACKING_ERROR ",
-    "estado" : "",
-    "alcada" : "EXECUTIVO_GESTAO",
-    "abertaEm": "03/08/2020",
-    "prazo" : "10/09/2020", 
-    "classificacao": "CLIENTE",
-    "consumo": 	4.0017,
-    "pl": 314892235.21 ,
-    "limite" : 0.4,
-    "trackingError" : 0.0019
-  }
+  @ViewChild(ParecerComponent) parecerComponent;
+
+
+  constructor( private router: Router,
+                private route: ActivatedRoute ) { }
+
+          
+  title = 'Tratamento de Ocorrencia'
+
+  ocorrencia : Ocorrencia 
+  ocorrencias: Ocorrencia[] 
+  parecer: string = 'blablabla'
+  dataPrazo : any 
+  tipoSelected = '';
+
+
+ 
 
   voltar(){
-    this.router.navigate(['limite'])
+    let ocorrenciasJson = JSON.stringify( this.ocorrencias );
+    this.router.navigate(['limite', { os : ocorrenciasJson }])
   }
 
-  ngOnInit(): void {
+  salvar(){
+    alert(this.parecer)
+  }
+
+  ngAfterViewInit() {
+    this.parecer = this.parecerComponent.parecer
+  }
+
+  ngOnInit(): void {      
+  let object =  JSON.parse( this.route.snapshot.paramMap.get('o') )
+  this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
+  this.ocorrencia = object.ocorrencia
+  this.dataPrazo =  new Date(this.ocorrencia.prazo)
+
   }
 
 }

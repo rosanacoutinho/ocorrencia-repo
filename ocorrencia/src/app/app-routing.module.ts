@@ -7,6 +7,9 @@ import { TratamentoComponent } from './components/limite/views/tratamento/tratam
 import { AcompanhamentoComponent } from './components/limite/views/acompanhamento/acompanhamento.component'
 import { DetalhamentoComponent } from './components/limite/views/detalhamento/detalhamento.component'
 
+import { ParecerComponent } from './components/limite/views/parecer/parecer.component'
+import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'
+
 
 const routes: Routes = [
   {
@@ -24,6 +27,14 @@ const routes: Routes = [
 {
   path:"limite/detalhamento",
   component: DetalhamentoComponent
+},
+{
+  path:"limite/parecer",
+  component: ParecerComponent
+},
+{
+  path:"limite/visualizacao",
+  component: VisualizacaoComponent
 }
 ];
 

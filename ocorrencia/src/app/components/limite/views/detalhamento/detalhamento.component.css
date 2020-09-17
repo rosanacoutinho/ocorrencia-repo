@@ -1,0 +1,22 @@
+.mat-card{
+    margin-bottom: 1em;
+}
+
+.botoes {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    justify-items: end;
+    justify-content: end;
+    margin: 1em;
+}
+
+.botao:first-child {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: start;
+  }
+  
+  .botao {
+    padding: 10px;
+  }

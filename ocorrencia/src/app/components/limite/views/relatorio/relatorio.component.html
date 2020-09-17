@@ -1,19 +1,8 @@
 
-
 <div>
-
-    <mat-form-field class="datepicker" appearance="fill">
-        <mat-label>Data de Movimento</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      
-
-    <button mat-raised-button (click)="consultar()" color="primary"> Consultar </button>
-
+   
+   <mat-card class="titulo"> {{title}} </mat-card>
+    
 
     <table mat-table class="table row-border hover responsive" datatable [dtOptions]="dtOptions">
         <thead>
@@ -22,7 +11,7 @@
             <th>Drive</th>
             <th>Divisao</th>
             <th>Tipo</th>
-            <th>Inicio</th>
+            <th>Aberta em</th>
             <th>PL</th>
             <th>Limite</th>
             <th>Consumo</th>
@@ -41,7 +30,7 @@
             <td>{{ocorrencia.limite}}</td>
             <td>{{ocorrencia.consumo}}</td>
             <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
-            <td>  <button mat-stroked-button color="primary" (click)="tratarOcorrencia()">Tratar</button>   </td>
+            <td>  <button mat-stroked-button color="primary" (click)="tratarOcorrencia(ocorrencia)">Tratar</button>   </td>
         </tr>
         </tbody>
     </table>

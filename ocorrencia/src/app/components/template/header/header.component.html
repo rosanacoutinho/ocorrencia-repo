@@ -4,18 +4,32 @@
             <img class="logo" src="assets/img/logodtvm.png" alt="logo">
         </a>
     </span>
-    <button mat-button [matMenuTriggerFor]="menu">Ocorrencia</button>
-    <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink='/limite'>Limite</button>
-    <button mat-menu-item>GEA</button>
-    <button mat-menu-item>Liquidez</button>
+
+    <button mat-button [matMenuTriggerFor]="ocorrencias">Ocorrencia</button>
+    <mat-menu #ocorrencias="matMenu">
+      <button mat-menu-item  [matMenuTriggerFor]="limite">Limite</button>
+      <button mat-menu-item [matMenuTriggerFor]="gea">GEA</button>
     </mat-menu>
+    <mat-menu #limite="matMenu">
+      <button mat-menu-item routerLink='/limite'>Tratamento</button>
+      <button mat-menu-item routerLink='/limite/acompanhamento'>Acompanhamento</button>
+    </mat-menu>
+    <mat-menu #gea="matMenu">
+        <button mat-menu-item>Em contrucao</button>
+    </mat-menu>
+
     <button mat-button >Relatorio</button>
     <button mat-button >Painel Controle</button>
 </mat-toolbar>
 
-<button mat-menu-item routerLink='/limite'>Tratamento </button>
-<button mat-menu-item routerLink='/limite/acompanhamento'>Acompanhamento </button>
+
+
+
+
+
+
+
+
 
 
 

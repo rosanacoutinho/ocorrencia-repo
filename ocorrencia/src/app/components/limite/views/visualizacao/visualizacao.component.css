@@ -1,0 +1,23 @@
+.mat-card{
+  margin-bottom: 1em;
+}
+
+mat-grid-tile {
+    /* background: lightblue; */
+    position: absolute;
+    margin-left: 2cm;
+  }
+
+  .dado {
+    width: 100%; display: flex; align-items: flex-start;
+  }
+
+
+  label {
+    cursor: default;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 14px;
+  }
+
+
