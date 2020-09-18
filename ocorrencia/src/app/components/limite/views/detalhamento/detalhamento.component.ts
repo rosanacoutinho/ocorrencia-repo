@@ -15,6 +15,7 @@ export class DetalhamentoComponent implements OnInit {
   ocorrencia : Ocorrencia 
   ocorrencias: Ocorrencia[] 
 
+  // registros = this.ocorrencia.registros
   registros = [
           {
             "id": 345464 ,

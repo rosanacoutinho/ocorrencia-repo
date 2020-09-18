@@ -22,21 +22,16 @@ export class RelatorioComponent implements OnInit {
 
 ocorrencias: Ocorrencia[] 
 
-/** metodo chamado pelo botao de consulta */
-consultar(){ 
-  this.ocorrencias = [];
-  //this.ocorrenciaLimiteService.showMessage('carregando tabela');
-   this.getOcorrencias()
-}
 
-/*Metodo aciona servicco para buscar ocorrencias via http*/ 
+
+/*Metodo aciona servico para buscar ocorrencias via http*/ 
 getOcorrencias(){
   this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => {
     this.ocorrencias = ocorrencias
   })
 }
 
-
+/*ir para pagina de tratamento*/ 
 tratarOcorrencia(ocorrencia: Ocorrencia){
   let ocorrenciaJson = JSON.stringify({ ocorrencia });
   let ocorrenciasJson = JSON.stringify( this.ocorrencias );

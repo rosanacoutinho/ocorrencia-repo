@@ -15,6 +15,8 @@ import { RelatorioComponent } from './components/limite/views/relatorio/relatori
 import { TratamentoComponent } from './components/limite/views/tratamento/tratamento.component';
 import { AcompanhamentoComponent } from './components/limite/views/acompanhamento/acompanhamento.component'; 
 import { DetalhamentoComponent } from './components/limite/views/detalhamento/detalhamento.component'
+import { ParecerComponent } from './components/limite/views/parecer/parecer.component';
+import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'; 
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,8 +32,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card'; 
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ParecerComponent } from './components/limite/views/parecer/parecer.component';
-import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinculacao/dialog-vinculacao.component';
+
 
 
 @NgModule({
@@ -45,6 +48,7 @@ import { VisualizacaoComponent } from './components/limite/views/visualizacao/vi
     DetalhamentoComponent,
     ParecerComponent,
     VisualizacaoComponent,
+    DialogVinculacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { VisualizacaoComponent } from './components/limite/views/visualizacao/vi
     HttpClientModule,
     MatCardModule ,
     MatSelectModule ,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
   ],
   providers: [
     MatDatepickerModule,

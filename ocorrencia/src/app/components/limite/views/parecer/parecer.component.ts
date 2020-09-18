@@ -17,7 +17,7 @@ export class ParecerComponent implements OnInit {
 
   dataPrazo : Date
   tipoSelected = '';
-  parecer = 'h!';
+  parecer = '';
   
   ngOnInit(): void {
     this.dataPrazo =  new Date(this.ocorrencia.prazo)

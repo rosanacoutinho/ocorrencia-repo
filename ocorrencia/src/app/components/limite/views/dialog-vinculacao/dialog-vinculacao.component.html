@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>Informe o ID da ocorrência a qual deseja vincular esta</p>
+  <mat-form-field>
+    <mat-label>ID da Ocorrência principal</mat-label>
+    <input matInput [(ngModel)]="data.idOcorrenciaPrincipal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.idOcorrenciaPrincipal" (click)="vincularOcorrencia()" cdkFocusInitial>Ok</button>
+</div>

@@ -36,7 +36,7 @@
                                            
                     <mat-form-field class="areaParecer">
                           <mat-label>Parecer</mat-label>
-                          <textarea class="areaParecer" [(value)]="parecer" matInput rows="7"  placeholder="Insira seu texto aqui" required minlength="4"></textarea>
+                          <textarea class="areaParecer"  [(ngModel)]='parecer' [ngModelOptions]="{standalone: true}" matInput rows="7"  placeholder="Insira seu texto aqui" required minlength="4"></textarea>
                         </mat-form-field>
                       </form>
                   </div>
@@ -81,5 +81,3 @@
 
     </mat-card-content>
 </mat-card>
-
-{{parecer}}
