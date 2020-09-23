@@ -2,6 +2,10 @@
   margin-bottom: 1em;
 }
 
+.mat-accordion{
+  margin-bottom: 1em;
+}
+
 mat-grid-tile {
     /* background: lightblue; */
     position: absolute;

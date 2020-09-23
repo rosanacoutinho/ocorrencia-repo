@@ -29,10 +29,10 @@ export class TratamentoComponent implements OnInit {
 
   ocorrencia : Ocorrencia 
   ocorrencias: Ocorrencia[] 
-  parecer: string = 'blablabla'
-  dataPrazo : any 
+  
+  parecer: string  
   tipoSelected = '';
-  idOcorrenciaPrincipal: number;
+  idOcorrenciaPrincipal: number;/**id da Ocorrencia vinculavel */
 
 
   openDialog(): void {
@@ -55,22 +55,25 @@ export class TratamentoComponent implements OnInit {
 
   salvar(){
     this.parecer = this.parecerComponent.parecer
-    this.dataPrazo = this.parecerComponent.dataPrazo
-    this.tipoSelected = this.parecerComponent.tipoSelected
-
-    alert("confirma?")
+    if (this.parecer == '')
+      alert('parecer nao pode ser vazio')
   }
 
   ocultarOcorrencia(){
-    alert("confirma?")
+    this.parecer = this.parecerComponent.parecer
+    if (this.parecer == '')
+      alert('parecer nao pode ser vazio')
+  //chamara o metodo de invalidar ocorrencia do back end enviando o parecer dado pelo acessor
   }
 
+
   ngOnInit(): void {      
-  let object =  JSON.parse( this.route.snapshot.paramMap.get('o') )
-  this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
-  this.ocorrencia = object.ocorrencia
-  this.dataPrazo =  new Date(this.ocorrencia.prazo)
+    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
+    let object =  JSON.parse( this.route.snapshot.paramMap.get('o') )  
+    this.ocorrencia = object.ocorrencia 
   }
+
+
 
 }
 

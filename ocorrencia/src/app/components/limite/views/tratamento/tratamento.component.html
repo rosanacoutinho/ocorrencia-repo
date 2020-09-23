@@ -2,18 +2,18 @@
 <mat-card class="titulo"> {{title}} </mat-card>
     
 <app-visualizacao [ocorrencia]="ocorrencia" ></app-visualizacao>
+
 <app-parecer [ocorrencia]="ocorrencia"></app-parecer>
 
 <div  class='botoes'>
   <div  class='botao'>
-    <button mat-stroked-button color="primary" (click)="salvar()">Salvar Parecer</button>
-    <button mat-stroked-button color="primary" (click)="ocultarOcorrencia()">Ocultar Ocorrencia</button>
-    <button mat-stroked-button color="primary" (click)="openDialog()">Vincular Ocorrencia</button>
+    <button mat-stroked-button color="primary" (click)="salvar()"  [disabled]="false">Salvar Parecer</button>
+    <button mat-stroked-button color="primary" (click)="ocultarOcorrencia()"  *ngIf= 'ocorrencia.alcadaAtual === "RISCO"'>Ocultar Ocorrencia</button>
+    <button mat-stroked-button color="primary" (click)="openDialog()"  *ngIf= 'ocorrencia.alcadaAtual === "RISCO"'>Vincular Ocorrencia</button>
   </div>
   <div class='botao'>
     <button mat-stroked-button color="primary" (click)="voltar()" style="align-items: left; " >Voltar</button>
   </div>
 </div>
-
 
 

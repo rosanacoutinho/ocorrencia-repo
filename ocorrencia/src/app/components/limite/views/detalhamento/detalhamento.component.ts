@@ -11,52 +11,11 @@ import { Ocorrencia } from '../../models/ocorrencia.model';
 })
 export class DetalhamentoComponent implements OnInit {
 
-  title = 'Detalhamento Ocorrencia'
+  title = 'Detalhamento de ocorrência'
   ocorrencia : Ocorrencia 
   ocorrencias: Ocorrencia[] 
 
-  // registros = this.ocorrencia.registros
-  registros = [
-          {
-            "id": 345464 ,
-          "dataRegistro": "2020-01-01 00:00:00",
-          "alcada": "RISCO",
-          "parecer": "porque sim",
-          "autor": {
-                          "matricula": "F00000",
-                          "nome": "SISTEMA",
-                          "alcada": "SISTEMA",
-                          "autorizacaoDespacho": 1
-                          }
-          },
-          {
-            "id": 345465,
-          "dataRegistro": "2020-01-01 00:00:00" ,
-          "alcada": "RISCO",
-          "parecer": "Fundo extrapolado devido grande volude de merda que deu",
-          "autor": {
-                          "matricula": "F00000",
-                          "nome": "SISTEMA",
-                          "alcada": "SISTEMA",
-                          "autorizacaoDespacho": 1
-                          }
-          },
-          {
-            "id": 345470,
-          "dataRegistro": "2020-01-025 00:00:00" ,
-          "alcada": "GESTAO",
-          "parecer": "De acordo",
-          "autor": {
-                          "matricula": "F00000",
-                          "nome": "SISTEMA",
-                          "alcada": "SISTEMA",
-                          "autorizacaoDespacho": 1
-                          }
-          }
-        ]
-
-
-
+  alcadaUser = 'RISCO' //SO PODERA REINICIAR UMA OCORRENCIA O PESSOA DA RISCO
 
   constructor(private ocorrenciaLimiteService: OcorrenciaLimiteService, 
               private router: Router,
@@ -66,6 +25,10 @@ export class DetalhamentoComponent implements OnInit {
   voltar(){
     let ocorrenciasJson = JSON.stringify( this.ocorrencias );
     this.router.navigate(['/limite/acompanhamento', { os : ocorrenciasJson }])
+  }
+
+  reiniciar(){
+    alert('Confirma?')
   }
 
   ngOnInit(): void {

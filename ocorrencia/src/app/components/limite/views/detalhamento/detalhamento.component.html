@@ -4,38 +4,9 @@
   
 <app-visualizacao [ocorrencia]="ocorrencia"></app-visualizacao>
 
-
-<mat-card>
-  <mat-card-header>
-      <div mat-card-avatar ></div>
-      <mat-card-title> Historico Parecer </mat-card-title>
-    </mat-card-header> 
-    <mat-card-content>
-
-      <table class="example-full-width" cellspacing="5">
-        <tr *ngFor="let item of registros">
-          <td> {{ item.id }}  </td>
-          <td> {{ item.dataRegistro }}  </td>
-          <td> {{ item.alcada }}  </td>
-          <td> {{ item.autor.nome }}  </td>
-          <td> {{ item.parecer }}  </td>
-         
-        </tr>
-     </table>
-
-
-    </mat-card-content>
-</mat-card>
-
-
-<!-- <ul>
-  <li *ngFor="let item of ocorrencia | keyvalue">
-      {{ item.key }} - {{ item.value }}
-  </li>
-</ul> -->
-
 <div  class='botoes'>
   <div  class='botao'>
+    <button mat-stroked-button color="primary" (click)="reiniciar()" style="align-items: left;" *ngIf= 'alcadaUser === "RISCO"'>Reiniciar Ocorrência</button>
   </div>
   <div class='botao'>
     <button mat-stroked-button color="primary" (click)="voltar()" style="align-items: left; " >Voltar</button>

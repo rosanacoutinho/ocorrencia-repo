@@ -21,7 +21,7 @@ export class DialogVinculacaoComponent implements OnInit {
   }
 
   vincularOcorrencia(){
-    alert('confirma vinculacao?')
+    
   }
 
   ngOnInit(): void {

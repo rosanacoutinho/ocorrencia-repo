@@ -5,3 +5,7 @@
 .titulo { 
     margin-bottom: 1cm;
  }
+
+.botoesInfor {
+    display:   inline-flex;
+}

@@ -11,11 +11,15 @@ export class VisualizacaoComponent implements OnInit {
 
   
   @Input() ocorrencia: Ocorrencia;
-  
+
   constructor() { }
+
+  panelOpenState = true;
 
   ngOnInit(): void {
   }
 
 
 }
+
+

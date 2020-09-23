@@ -2,12 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataTablesModule } from 'angular-datatables';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
-
+/** Meus componentes  */
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/template/header/header.component';
 import { FooterComponent } from './components/template/footer/footer.component';
@@ -18,12 +17,13 @@ import { DetalhamentoComponent } from './components/limite/views/detalhamento/de
 import { ParecerComponent } from './components/limite/views/parecer/parecer.component';
 import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'; 
 
-
+/** Material  */
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter/';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,7 +34,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinculacao/dialog-vinculacao.component';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion'; 
 
+/** pipes  */
+import { TransformTitlePipe } from './components/pipes/transform-title.pipe';
+import { FormatAnyPipe } from './components/pipes/format-any.pipe';
 
 
 @NgModule({
@@ -49,6 +55,8 @@ import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinc
     ParecerComponent,
     VisualizacaoComponent,
     DialogVinculacaoComponent,
+    TransformTitlePipe,
+    FormatAnyPipe
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,7 @@ import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinc
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMomentDateModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -69,7 +78,10 @@ import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinc
     MatCardModule ,
     MatSelectModule ,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatExpansionModule
   ],
   providers: [
     MatDatepickerModule,

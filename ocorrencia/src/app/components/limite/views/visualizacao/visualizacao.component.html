@@ -5,14 +5,130 @@
       <mat-card-title> Ocorrência </mat-card-title>
     </mat-card-header> 
     <mat-card-content>
-      <mat-grid-list cols="5" rowHeight="6:1" >
-        <mat-grid-tile  colspan="1" *ngFor="let item of ocorrencia | keyvalue">
+
+      <mat-grid-list cols="4" rowHeight="8:1" >
+ 
+        <mat-grid-tile  colspan="1" >
           <div class='dado'>
-          <label> {{ item.key }}:  </label>  
-          <p> &nbsp;&nbsp; {{ item.value }}</p> 
+          <label> ID  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.codigoSequencial }}</p> 
           </div>
         </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Data Abertura  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.dataHoraAbertura |  date:'dd/MM/yyyy hh:mm' }}</p> 
+          </div>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Data Movimento  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.dataMovimento |  date:'dd/MM/yyyy' }}</p> 
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Prazo Final </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.dataPrazoFinal  |  date:'dd/MM/yyyy'}}</p> 
+          </div>
+        </mat-grid-tile>
+ 
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Alçada Atual  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.alcadaAtual | formatAny: 'alcadaAtual'  }}</p> 
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Alçada Final  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.alcadaFinal  | formatAny: 'alcadaFinal' }}</p> 
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Estado Ocorrência  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.estado  | formatAny: 'estado'}}</p> 
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" *ngIf="ocorrencia.classificacao">
+          <div class='dado'>
+          <label>  Classificação  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.classificacao | formatAny: 'classificacao' }}</p> 
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile  colspan="1" *ngIf="ocorrencia.ocorrenciaPrincipal">
+          <div class='dado'>
+          <label>  Ocorrência Principal  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.ocorrenciaPrincipal }}</p> 
+          </div>
+        </mat-grid-tile>
+
       </mat-grid-list>
     </mat-card-content>
   </mat-card>
 
+  <mat-card>
+      <mat-card-content> 
+        <mat-grid-list cols="4" rowHeight="8:1" >
+            <mat-grid-tile  colspan="1" *ngFor="let item of ocorrencia.atributos | keyvalue">
+              <div class='dado'>
+              <label> {{ item.key | transformTitle  | titlecase }}  </label>  
+              <p> &nbsp;&nbsp; {{ item.value | formatAny: item.key }}</p> 
+              </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+  </mat-card>
+
+    <!-- <mat-card  *ngIf="ocorrencia.registros.length > 0">
+      <mat-card-header>
+        <div mat-card-avatar ></div>
+        <mat-card-title> Histórico parecer </mat-card-title>
+      </mat-card-header> 
+      <mat-card-content> 
+        
+        <table class="table row-border hover responsive" cellspacing="5">
+          <tr *ngFor="let registro of ocorrencia.registros">
+            <td style="padding-right: 30px !important;" > {{ registro.dataRegistro }}  </td>
+            <td style="padding-right: 30px !important;" > {{ registro.alcada }}  </td>
+            <td style="padding-right: 30px !important;"> {{ registro.autor.nome }}  </td>
+            <td> {{ registro.parecer }}  </td>       
+          </tr>
+       </table>
+
+      </mat-card-content>
+  </mat-card> -->
+
+  <mat-accordion  *ngIf="ocorrencia.registros.length > 0">
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Histórico de pareceres
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <table class="table row-border hover responsive" cellspacing="5">
+        <tr *ngFor="let registro of ocorrencia.registros">
+          <td style="padding-right: 30px !important;" > {{ registro.dataRegistro }}  </td>
+          <td style="padding-right: 30px !important;" > {{ registro.alcada }}  </td>
+          <td style="padding-right: 30px !important;"> {{ registro.autor.nome }}  </td>
+          <td> {{ registro.parecer }}  </td>       
+        </tr>
+     </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  
