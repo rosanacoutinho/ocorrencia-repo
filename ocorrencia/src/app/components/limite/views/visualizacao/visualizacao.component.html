@@ -1,8 +1,8 @@
 
 <mat-card>
-  <mat-card-header>
+  <mat-card-header  [style.backgroundColor]=cor >
       <div mat-card-avatar ></div>
-      <mat-card-title> Ocorrência </mat-card-title>
+      <mat-card-title [ngStyle]="{'font-size':'16px'}" > Ocorrência </mat-card-title>
     </mat-card-header> 
     <mat-card-content>
 
@@ -22,7 +22,6 @@
           </div>
         </mat-grid-tile>
 
-
         <mat-grid-tile  colspan="1" >
           <div class='dado'>
           <label> Data Movimento  </label>  
@@ -37,6 +36,13 @@
           </div>
         </mat-grid-tile>
  
+         <mat-grid-tile  colspan="1" >
+          <div class='dado'>
+          <label> Estado Ocorrência  </label>  
+          <p> &nbsp;&nbsp; {{ ocorrencia.estado  | formatAny: 'estado'}}</p> 
+          </div>
+        </mat-grid-tile>
+		
         <mat-grid-tile  colspan="1" >
           <div class='dado'>
           <label> Alçada Atual  </label>  
@@ -51,12 +57,6 @@
           </div>
         </mat-grid-tile>
 
-        <mat-grid-tile  colspan="1" >
-          <div class='dado'>
-          <label> Estado Ocorrência  </label>  
-          <p> &nbsp;&nbsp; {{ ocorrencia.estado  | formatAny: 'estado'}}</p> 
-          </div>
-        </mat-grid-tile>
 
         <mat-grid-tile  colspan="1" *ngIf="ocorrencia.classificacao">
           <div class='dado'>
@@ -67,7 +67,7 @@
 
         <mat-grid-tile  colspan="1" *ngIf="ocorrencia.ocorrenciaPrincipal">
           <div class='dado'>
-          <label>  Ocorrência Principal  </label>  
+          <label>  Ocorrência Principal   </label>  
           <p> &nbsp;&nbsp; {{ ocorrencia.ocorrenciaPrincipal }}</p> 
           </div>
         </mat-grid-tile>
@@ -89,10 +89,10 @@
       </mat-card-content>
   </mat-card>
 
-    <!-- <mat-card  *ngIf="ocorrencia.registros.length > 0">
-      <mat-card-header>
+    <mat-card  *ngIf="ocorrencia.registros.length > 0">
+      <mat-card-header  [style.backgroundColor]=cor>
         <div mat-card-avatar ></div>
-        <mat-card-title> Histórico parecer </mat-card-title>
+        <mat-card-title [ngStyle]="{'font-size':'16px'}"> Histórico parecer </mat-card-title>
       </mat-card-header> 
       <mat-card-content> 
         
@@ -106,29 +106,39 @@
        </table>
 
       </mat-card-content>
-  </mat-card> -->
+  </mat-card>
 
-  <mat-accordion  *ngIf="ocorrencia.registros.length > 0">
-    <mat-expansion-panel >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Histórico de pareceres
-        </mat-panel-title>
-        <mat-panel-description>
-
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <mat-card  *ngIf='ocorrencia.classificacao === "REGISTRO_CONTINGENCIA"'>
+    <mat-card-header  [style.backgroundColor]=cor>
+      <div mat-card-avatar ></div>
+      <mat-card-title [ngStyle]="{'font-size':'16px'}"> Contingência </mat-card-title>
+    </mat-card-header> 
+    <mat-card-content> 
       
-      <table class="table row-border hover responsive" cellspacing="5">
-        <tr *ngFor="let registro of ocorrencia.registros">
-          <td style="padding-right: 30px !important;" > {{ registro.dataRegistro }}  </td>
-          <td style="padding-right: 30px !important;" > {{ registro.alcada }}  </td>
-          <td style="padding-right: 30px !important;"> {{ registro.autor.nome }}  </td>
-          <td> {{ registro.parecer }}  </td>       
-        </tr>
-     </table>
-    </mat-expansion-panel>
-  </mat-accordion>
+      <form class="form-contingencia">                                         
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <br>
+            <td><mat-form-field class="full-width">
+              <mat-label>PL</mat-label>
+              <input matInput disabled>
+            </mat-form-field></td>
+          </tr>
+          <tr>
+            <br>
+            <td><mat-form-field class="full-width">
+              <mat-label>VaR</mat-label>
+              <input matInput maxlength="15" disabled>
+              
+            </mat-form-field></td>
+          </tr>
+        </table>
+      </form>
+
+    </mat-card-content>
+</mat-card>
+
+
 
 
   

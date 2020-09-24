@@ -6,7 +6,6 @@ import { Ocorrencia } from '../../models/ocorrencia.model';
 import { Autor } from '../../models/autor.model';
 import { Subject } from 'rxjs';
 
-
 @Component({
   selector: 'app-relatorio',
   templateUrl: './relatorio.component.html',
@@ -20,7 +19,11 @@ export class RelatorioComponent implements OnInit {
   
   
 title = 'Extrapolações de Limite de Fundos';
-ocorrencias: Ocorrencia[] 
+ocorrencias: Ocorrencia[] = []
+
+dtTrigger: Subject<any> = new Subject();
+
+
 autor: Autor =  {
             "matricula": "F8783477",
             "nome": "ROSANA DE PAULA COUTINHO BARROS",
@@ -31,13 +34,19 @@ alcadaUser = this.autor.alcada
 dtOptions: any = [];/*opcoes da dataTable*/ 
 
 
-/*Metodo aciona servico para buscar ocorrencias via http*/ 
-getOcorrencias(alcadaUser : string){
-  this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => { 
-    setTimeout(() => this.ocorrencias = ocorrencias, 1000);  
 
+
+/*Metodo aciona servico para buscar ocorrencias via http*/ 
+getDadosTabela(alcadaUser : string){
+  this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => { 
+    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )   
+      if (this.ocorrencias == null) {  
+        this.ocorrencias = ocorrencias;
+      }    
+      this.dtTrigger.next(); //renderiza tabela
   })
 }
+
 
 /*ir para pagina de tratamento*/ 
 tratarOcorrencia(ocorrencia: Ocorrencia) {
@@ -56,15 +65,17 @@ liberar(ocorrencia: Ocorrencia){
   alert(ocorrencia.id)
 }
 
+ 
+
+
+
+
 ngOnInit(){
-  this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
-  if (this.ocorrencias == null) { //se primeiro acesso..
-    this.getOcorrencias(this.alcadaUser)
-  }
+  console.log('iniciando app relatorio')
   /*opcoes da dataTable*/ 
   this.dtOptions = {
     pagingType: 'full_numbers',
-      pageLength: 20,
+      pageLength: 100,
       dom: 'Bfrtip',
       buttons: [
         'excel', 
@@ -88,9 +99,33 @@ ngOnInit(){
           first: "Primeiro",
           last: "Último"
         }
-      }
-    };  
+      },
+      rowCallback: function( row, data, index ) {
+        var dataPrazo = data[10];
+        var prazoOcorrencia = new Date(dataPrazo);    
+        var dataAtencao = new Date(dataPrazo).setDate(prazoOcorrencia.getDate()-2);   
+        var dataAtencaoDate = new Date(dataAtencao)
+        var dataHoje = new Date();      
+        var vencendo = (dataHoje >= dataAtencaoDate) && (dataHoje <= prazoOcorrencia);      
+        var vencida = dataHoje > prazoOcorrencia;
+        
+        if ( vencida ) { $('td', row).css('color', 'red');}
+        else if ( vencendo ) {$('td', row).css('color', 'Orange');}
+    }
+  }; 
+    
+    this.getDadosTabela(this.alcadaUser)
+    
   }
+
+  
+
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
 
 
 }

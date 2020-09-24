@@ -10,6 +10,10 @@
     margin-left: 1em;
 }
 
+.mat-raised-button {
+    margin-left: 1em;
+}
+
 .botoes {
     padding: 10px;
     display: grid;

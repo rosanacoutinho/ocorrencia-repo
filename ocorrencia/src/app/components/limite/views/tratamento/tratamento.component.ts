@@ -50,7 +50,7 @@ export class TratamentoComponent implements OnInit {
 
   voltar(){
     let ocorrenciasJson = JSON.stringify( this.ocorrencias );
-    this.router.navigate(['limite', { os : ocorrenciasJson }])
+    this.router.navigate(['limite', { os : ocorrenciasJson }]) 
   }
 
   salvar(){

@@ -10,6 +10,8 @@ import { WeekDay } from '@angular/common';
 import { MAT_DATE_FORMATS, MatDateFormats , DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Moment } from 'moment';
 import { MyDateAdapter } from '../my-date-adapter';
+import { Subject } from 'rxjs';
+
 
 const DATE_FORMAT: MatDateFormats = {
 	parse: {
@@ -41,6 +43,8 @@ export class AcompanhamentoComponent implements OnInit {
   dataFim : string
   ocorrencias: Ocorrencia[]
 
+  dtTrigger: Subject<any> = new Subject();
+
   dateFilter = (dataMovimento: Moment) => (dataMovimento.weekday() != WeekDay.Sunday) && (dataMovimento.weekday() != WeekDay.Saturday)
 
   constructor(private ocorrenciaLimiteService: OcorrenciaLimiteService, 
@@ -53,9 +57,21 @@ export class AcompanhamentoComponent implements OnInit {
 buscar(){  
   let dataInicio = this.dataInicio
   let dataFim = this.dataFim
-  this.ocorrencias = [];
 
-  this.getOcorrenciasPeriodo(dataInicio, dataFim)
+  this.ocorrenciaLimiteService.getOcorrenciasPeriodo(dataInicio,dataFim).subscribe( ocorrencias => { 
+    this.ocorrencias = ocorrencias;
+  })
+
+}
+
+getDadosTabela(dataInicio: string , dataFim: string ){
+  this.ocorrenciaLimiteService.getOcorrenciasPeriodo('2020-01-01','2020-04-01').subscribe( ocorrencias => {   
+   this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )   
+     if (this.ocorrencias == null) {  
+        this.ocorrencias = ocorrencias;
+      }    
+      this.dtTrigger.next(); //renderiza tabela
+  })
 }
 
 detalharOcorrencia(ocorrencia: Ocorrencia){  
@@ -65,23 +81,18 @@ detalharOcorrencia(ocorrencia: Ocorrencia){
 }
 
 
-getOcorrenciasPeriodo(dataInicio, dataFim){
-  this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => {
-    this.ocorrencias= ocorrencias
-  })
-}
-
-/*opcoes da dataTable*/ 
 dtOptions: any = {};
-
+  
+  
   ngOnInit(): void {
 
-
+    
   /*opcoes da dataTable*/ 
   this.dtOptions = {
     pagingType: 'full_numbers',
      pageLength: 20,
      dom: 'Bfrtip',
+     ordering: true,
      buttons: [
        'excel',
        'copy',
@@ -105,14 +116,36 @@ dtOptions: any = {};
          last: "Último"
        }
      }
+    //  ,drawCallback(setting) {
+    //     console.log("setting is  ", setting)
+    //     var api = this.api();
+    //     var rows = api.rows({ page: 'current' }).nodes();
+    //     console.log("rows is ", rows);
+    //     var last = null;
+    //     const columIndex = 7;
+    //     api.column(columIndex, { page: 'current' }).data().each(function (group, i) {
+    //       if (last !== group) {
+    //         $(rows).eq(i).before(
+    //           '<tr style="color: grey !important;background-color: GhostWhite; height:10px!important ;" class="groupColumns"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="width: 300px !important;">' + group + '</td><td></td><td></td><td></td><td></td></tr>'
+    //         );
+    //         last = group;
+    //       }
+    //     });
+    //   }
+     
    
    };
 
  
-    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
-   
+  
+  this.getDadosTabela('bla' , 'bla' )
    
 }
 
+
+ngOnDestroy(): void {
+  //to unsubscribe the event
+  this.dtTrigger.unsubscribe();
+}
 
 }

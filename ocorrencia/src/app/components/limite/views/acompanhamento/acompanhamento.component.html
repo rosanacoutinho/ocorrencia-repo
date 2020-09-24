@@ -30,32 +30,36 @@
     <button mat-raised-button (click)="buscar()" color="primary"  [disabled]="dataInicio == null || dataFim ==null"> Consultar </button>
     
   
-    <table mat-table class="table row-border hover responsive" datatable [dtOptions]="dtOptions">
+    <table mat-table class="table row-border hover responsive" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
         <thead>
         <tr>
-            <th style="width: 300px !important;">Fundo</th>
-            <th>Drive</th>
-            <th style="width: 200px !important;">Divisao</th>
-            <th>Tipo Limite</th>
-            <th>Inicio</th>
-            <th>PL</th>
-            <th>Limite</th>
-            <th>Consumo</th>
-            <th style="width: 120px !important;">Data Movimento</th>
+          <th>ID</th>    
+          <th>Data Movimento</th>
+          <th >Fundo</th>
+          <th style="width: 200px !important;">Divisao</th>
+          <th>Drive</th> 
+          <th>Tipo Limite</th>   
+          <th>Tipo Ocorrencia</th>      
+          <th>Estado</th>
+          <th>Alçada Final</th>
+          <th>Data Abertura</th>
+          <th>Data Prazo</th>
             <th> </th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let ocorrencia of ocorrencias">
-            <td>{{ocorrencia.atributos.fundo}}</td>
-            <td>{{ocorrencia.atributos.drive}}</td>
-            <td>{{ocorrencia.atributos.divisao}}</td>
-            <td>{{ocorrencia.atributos.tipoLimite}}</td>
-            <td>{{ocorrencia.dataHoraAbertura  |  date:'yyyy-MM-dd' }}</td>
-            <td>{{ocorrencia.atributos.pl}}</td>
-            <td>{{ocorrencia.atributos.limite}}</td>
-            <td>{{ocorrencia.atributos.consumo}}</td>
-            <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
+          <td>{{ocorrencia.codigoSequencial}}</td>
+          <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
+          <td>{{ocorrencia.atributos.fundo}}</td>
+          <td>{{ocorrencia.atributos.divisao}}</td>
+          <td>{{ocorrencia.atributos.drive}}</td>
+          <td>{{ocorrencia.atributos.tipoLimite}}</td>
+          <td>{{ocorrencia.classificacao}}</td>      
+          <td>{{ocorrencia.estado}}  {{ocorrencia.alcadaAtual}}</td>
+          <td>{{ocorrencia.alcadaFinal}}</td>
+          <td>{{ocorrencia.dataHoraAbertura  |  date:'yyyy-MM-dd' }}</td>
+          <td>{{ocorrencia.dataPrazoFinal  |  date:'yyyy-MM-dd' }}</td>
             <td>  <button mat-stroked-button color="primary" (click)="detalharOcorrencia(ocorrencia)" >Detalhar</button>   </td>
         </tr>
         </tbody>

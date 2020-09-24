@@ -2,59 +2,62 @@
 <div>
    
    <mat-card class="titulo"> {{title}} </mat-card>
-    
 
-    <table datatable class="table row-border hover responsive"  [dtOptions]="dtOptions" >
-        <thead>
-        <tr>
-            <th style="width: 300px !important;">Fundo</th>
-            <th>Drive</th>
-            <th style="width: 200px !important;">Divisao</th>
-            <th>Tipo Limite</th>
-            <th>Data Abertura</th>
-            <th>PL</th>
-            <th>Limite</th>
-            <th>Consumo</th>
-            <th>Data Movimento</th>
-            <th style="width: 50px !important;"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let ocorrencia of ocorrencias">
-            <td>{{ocorrencia.atributos.fundo}}</td>
-            <td>{{ocorrencia.atributos.drive}}</td>
-            <td>{{ocorrencia.atributos.divisao}}</td>
-            <td>{{ocorrencia.atributos.tipoLimite}}</td>
-            <td>{{ocorrencia.dataHoraAbertura  |  date:'yyyy-MM-dd' }}</td>
-            <td>{{ocorrencia.atributos.pl}}</td>
-            <td>{{ocorrencia.atributos.limite}}</td>
-            <td>{{ocorrencia.atributos.consumo}}</td>
-            <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
-            <td *ngIf= 'alcadaUser !== "INFOR"'>  
-                <button mat-stroked-button color="primary" (click)="tratarOcorrencia(ocorrencia)">Tratar</button>
-            </td>           
-            <td *ngIf= 'alcadaUser === "INFOR"' > 
-                <div class='botoesInfor'>
-                <button mat-icon-button color="primary" (click)="liberar(ocorrencia)" style=" height: 20px;"
-                aria-label="Liberar" matTooltip="Liberar esta ocorrencia">
-                    <mat-icon>check_circle</mat-icon>
-                </button>  
-                <button mat-icon-button color="warn" (click)="invalidar(ocorrencia)" style=" height: 20px;"
-                aria-label="invalidar"  matTooltip="invalidar esta ocorrencia">
-                    <mat-icon>disabled_by_default</mat-icon>
-                </button>
-                 </div> 
-             </td>          
+
+		
+    
+   <table datatable class="table row-border hover responsive"  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+    <tr>
+        <th>ID</th>    
+        <th>Data Movimento</th>
+        <th style="width: 300px !important;">Fundo</th>
+        <th style="width: 200px !important;">Divisao</th>
+        <th>Drive</th> 
+        <th>Tipo Limite</th>   
+        <th>Consumo</th>      
+        <th>Estado</th>
+        <th>Alçada</th>
+        <th>Data Abertura</th>
+        <th>Data Prazo</th>
+        <th style="width: 50px !important;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ocorrencia of ocorrencias">
+        <td>{{ocorrencia.codigoSequencial}}</td>
+        <td>{{ocorrencia.dataMovimento |  date:'yyyy-MM-dd' }}</td>
+        <td>{{ocorrencia.atributos.fundo}}</td>
+        <td>{{ocorrencia.atributos.divisao}}</td>
+        <td>{{ocorrencia.atributos.drive}}</td>
+        <td>{{ocorrencia.atributos.tipoLimite}}</td>
+        <td>{{ocorrencia.atributos.consumo}}</td>      
+        <td>{{ocorrencia.estado}}  {{ocorrencia.alcadaAtual}}</td>
+        <td>{{ocorrencia.alcadaFinal}}</td>
+        <td>{{ocorrencia.dataHoraAbertura  |  date:'yyyy-MM-dd' }}</td>
+        <td>{{ocorrencia.dataPrazoFinal  |  date:'yyyy-MM-dd' }}</td>
       
-        </tr>
-        </tbody>
-    </table>
-
- 
-    
-
-
-    
+        <td *ngIf= 'alcadaUser !== "INFOR"'>  
+            <button mat-stroked-button color="primary" (click)="tratarOcorrencia(ocorrencia)">Tratar</button>
+        </td>           
+        <td *ngIf= 'alcadaUser === "INFOR"' > 
+            <div class='botoesInfor'>
+            <button mat-icon-button color="primary" (click)="liberar(ocorrencia)" style=" height: 20px;"
+            aria-label="Liberar" matTooltip="Liberar esta ocorrencia">
+                <mat-icon>check_circle</mat-icon>
+            </button>  
+            <button mat-icon-button color="warn" (click)="invalidar(ocorrencia)" style=" height: 20px;"
+            aria-label="invalidar"  matTooltip="invalidar esta ocorrencia">
+                <mat-icon>disabled_by_default</mat-icon>
+            </button>
+             </div> 
+         </td>          
+  
+    </tr>
+    </tbody>
+</table>
       
+
+
 
 </div>

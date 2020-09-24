@@ -21,10 +21,12 @@ export class OcorrenciaLimiteService {
     return this.http.get<Ocorrencia[]>(this.baseURL)
   }
 
-  salvarOcorrencia(){
-    
+  getOcorrenciasPeriodo(dataInicio: string, dataFim: string){
+    return this.http.get<Ocorrencia[]>(this.baseURL)
   }
-4
+
+  salvarOcorrencia(){}
+
   invalidarOcorrencia() {  
   }
 
