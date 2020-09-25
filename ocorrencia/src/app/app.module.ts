@@ -16,6 +16,7 @@ import { AcompanhamentoComponent } from './components/limite/views/acompanhament
 import { DetalhamentoComponent } from './components/limite/views/detalhamento/detalhamento.component'
 import { ParecerComponent } from './components/limite/views/parecer/parecer.component';
 import { VisualizacaoComponent } from './components/limite/views/visualizacao/visualizacao.component'; 
+import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinculacao/dialog-vinculacao.component';
 
 /** Material  */
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,7 +34,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogVinculacaoComponent } from './components/limite/views/dialog-vinculacao/dialog-vinculacao.component';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion'; 
