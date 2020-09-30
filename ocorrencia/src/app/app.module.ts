@@ -42,6 +42,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TransformTitlePipe } from './components/pipes/transform-title.pipe';
 import { FormatAnyPipe } from './components/pipes/format-any.pipe';
 
+import { DataService } from './components/limite/services/data.service'
+
 
 @NgModule({
   declarations: [
@@ -87,7 +89,8 @@ import { FormatAnyPipe } from './components/pipes/format-any.pipe';
     MatDatepickerModule,
     MatNativeDateModule ,
     MatFormFieldModule,
-    DatePipe
+    DatePipe,
+    DataService
   ],
   bootstrap: [AppComponent]
 })

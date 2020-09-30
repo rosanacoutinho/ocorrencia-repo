@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Ocorrencia } from '../../models/ocorrencia.model';
 import { Autor } from '../../models/autor.model';
 import { Subject } from 'rxjs';
+import { DataService } from "../../services/data.service";
+
 
 @Component({
   selector: 'app-relatorio',
@@ -15,14 +17,15 @@ export class RelatorioComponent implements OnInit {
   
   constructor( private ocorrenciaLimiteService: OcorrenciaLimiteService, 
                private router: Router,
-               private route: ActivatedRoute ) {}
+               private route: ActivatedRoute ,
+               private data: DataService ) {}
   
   
 title = 'Extrapolações de Limite de Fundos';
 ocorrencias: Ocorrencia[] = []
-
 dtTrigger: Subject<any> = new Subject();
 
+message:string;
 
 autor: Autor =  {
             "matricula": "F8783477",
@@ -38,11 +41,8 @@ dtOptions: any = [];/*opcoes da dataTable*/
 
 /*Metodo aciona servico para buscar ocorrencias via http*/ 
 getDadosTabela(alcadaUser : string){
-  this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => { 
-    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )   
-      if (this.ocorrencias == null) {  
-        this.ocorrencias = ocorrencias;
-      }    
+  this.ocorrenciaLimiteService.getOcorrencias().subscribe( ocorrencias => {     
+      this.ocorrencias = ocorrencias;       
       this.dtTrigger.next(); //renderiza tabela
   })
 }
@@ -50,19 +50,16 @@ getDadosTabela(alcadaUser : string){
 
 /*ir para pagina de tratamento*/ 
 tratarOcorrencia(ocorrencia: Ocorrencia) {
-  let ocorrenciaJson = JSON.stringify({ ocorrencia });
-  let ocorrenciasJson = JSON.stringify( this.ocorrencias );
-  this.router.navigate(['limite/tratamento', {o : ocorrenciaJson, os : ocorrenciasJson }] ); 
+  this.router.navigate(["limite/tratamento"]);
+  this.data.setData(ocorrencia, this.ocorrencias);
 }
 
 invalidar(ocorrencia: Ocorrencia){  
-  //chamara o metodo de invalidar ocorrencia do back end enviando um parecer padrao da infor
-  // 'Ocorrencia gerada por erro de sessao do RiskWatch'
-  alert(ocorrencia.id)
+  
 }
 
 liberar(ocorrencia: Ocorrencia){
-  alert(ocorrencia.id)
+  
 }
 
  
@@ -71,7 +68,9 @@ liberar(ocorrencia: Ocorrencia){
 
 
 ngOnInit(){
-  console.log('iniciando app relatorio')
+
+ 
+  
   /*opcoes da dataTable*/ 
   this.dtOptions = {
     pagingType: 'full_numbers',
@@ -114,15 +113,22 @@ ngOnInit(){
     }
   }; 
     
+
+ 
+
+  
+
     this.getDadosTabela(this.alcadaUser)
     
+
+  
+
   }
 
   
 
 
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 

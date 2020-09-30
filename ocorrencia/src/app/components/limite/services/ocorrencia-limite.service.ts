@@ -25,15 +25,24 @@ export class OcorrenciaLimiteService {
     return this.http.get<Ocorrencia[]>(this.baseURL)
   }
 
-  salvarOcorrencia(){}
-
-  invalidarOcorrencia() {  
+  salvar(ocorrencia: Ocorrencia) : Observable<Ocorrencia> {
+    return this.http.post<Ocorrencia>(this.baseURL, ocorrencia)
   }
 
-  vincularOcorrencia() {   
+  invalidar(ocorrencia: Ocorrencia) : Observable<Ocorrencia> {
+    return this.http.post<Ocorrencia>(this.baseURL, ocorrencia)
   }
 
-  reiniciarOcorrencia() {   
+  vincular(ocorrencia: Ocorrencia, ) : Observable<Ocorrencia> {
+    return this.http.post<Ocorrencia>(this.baseURL, ocorrencia)
+  }
+
+  liberar(ocorrencia: Ocorrencia) : Observable<Ocorrencia> {
+    return this.http.post<Ocorrencia>(this.baseURL, ocorrencia)
+  }
+
+  reiniciar(ocorrencia: Ocorrencia) : Observable<Ocorrencia> {
+    return this.http.post<Ocorrencia>(this.baseURL, ocorrencia)
   }
 
 }

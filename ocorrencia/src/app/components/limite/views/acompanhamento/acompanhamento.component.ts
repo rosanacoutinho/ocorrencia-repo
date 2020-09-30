@@ -12,6 +12,8 @@ import { Moment } from 'moment';
 import { MyDateAdapter } from '../my-date-adapter';
 import { Subject } from 'rxjs';
 
+import { DataService } from "../../services/data.service";
+
 
 const DATE_FORMAT: MatDateFormats = {
 	parse: {
@@ -49,7 +51,8 @@ export class AcompanhamentoComponent implements OnInit {
 
   constructor(private ocorrenciaLimiteService: OcorrenciaLimiteService, 
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private data: DataService) { }
 
 
 
@@ -57,27 +60,22 @@ export class AcompanhamentoComponent implements OnInit {
 buscar(){  
   let dataInicio = this.dataInicio
   let dataFim = this.dataFim
-
   this.ocorrenciaLimiteService.getOcorrenciasPeriodo(dataInicio,dataFim).subscribe( ocorrencias => { 
     this.ocorrencias = ocorrencias;
   })
-
 }
 
 getDadosTabela(dataInicio: string , dataFim: string ){
-  this.ocorrenciaLimiteService.getOcorrenciasPeriodo('2020-01-01','2020-04-01').subscribe( ocorrencias => {   
-   this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )   
-     if (this.ocorrencias == null) {  
-        this.ocorrencias = ocorrencias;
-      }    
-      this.dtTrigger.next(); //renderiza tabela
-  })
+  this.ocorrenciaLimiteService.getOcorrenciasPeriodo('2020-01-01','2020-04-01').subscribe( ocorrencias => {     
+    this.ocorrencias = ocorrencias;       
+    this.dtTrigger.next(); //renderiza tabela
+})
 }
 
+
 detalharOcorrencia(ocorrencia: Ocorrencia){  
-  let ocorrenciaJson = JSON.stringify({ ocorrencia });
-  let ocorrenciasJson = JSON.stringify( this.ocorrencias );
-  this.router.navigate(['/limite/detalhamento', {o : ocorrenciaJson, os : ocorrenciasJson }]) 
+  this.data.setData(ocorrencia, this.ocorrencias);
+  this.router.navigate(['/limite/detalhamento']) 
 }
 
 
@@ -137,7 +135,6 @@ dtOptions: any = {};
    };
 
  
-  
   this.getDadosTabela('bla' , 'bla' )
    
 }

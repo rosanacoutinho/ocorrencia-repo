@@ -1,9 +1,12 @@
 import { OcorrenciaLimiteService } from '../../services/ocorrencia-limite.service';
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { Ocorrencia } from '../../models/ocorrencia.model';
+
+import { DataService } from "../../services/data.service";
+
+
+
 @Component({
   selector: 'app-detalhamento',
   templateUrl: './detalhamento.component.html',
@@ -19,22 +22,21 @@ export class DetalhamentoComponent implements OnInit {
 
   constructor(private ocorrenciaLimiteService: OcorrenciaLimiteService, 
               private router: Router,
-              private route: ActivatedRoute) { }
+              private data: DataService) { }
 
 
   voltar(){
-    let ocorrenciasJson = JSON.stringify( this.ocorrencias );
-    this.router.navigate(['/limite/acompanhamento', { os : ocorrenciasJson }])
+    this.router.navigate(["/limite/acompanhamento"]);
+    this.data.upDateData(this.ocorrencias);
   }
 
   reiniciar(){
-    alert('Confirma?')
+    
   }
 
-  ngOnInit(): void {
-    let object =  JSON.parse( this.route.snapshot.paramMap.get('o') )
-    this.ocorrencias = JSON.parse( this.route.snapshot.paramMap.get('os') )
-    this.ocorrencia = object.ocorrencia
+  ngOnInit(): void {  
+    this.ocorrencia =  this.data.ocorrencia  ;
+    this.ocorrencias =  this.data.ocorrencias;
   }
 
 }
