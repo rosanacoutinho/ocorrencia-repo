@@ -6,6 +6,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data.idOcorrenciaPrincipal" (click)="vincularOcorrencia()" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.idOcorrenciaPrincipal"  cdkFocusInitial>Ok</button>
 </div>

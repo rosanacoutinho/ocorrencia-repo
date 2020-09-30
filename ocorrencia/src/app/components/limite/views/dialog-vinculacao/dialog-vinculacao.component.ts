@@ -16,9 +16,9 @@ export class DialogVinculacaoComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogVinculacaoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
 
   vincularOcorrencia(){
     

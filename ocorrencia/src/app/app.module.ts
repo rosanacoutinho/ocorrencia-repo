@@ -42,7 +42,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TransformTitlePipe } from './components/pipes/transform-title.pipe';
 import { FormatAnyPipe } from './components/pipes/format-any.pipe';
 
-import { DataService } from './components/limite/services/data.service'
+import { DataService } from './components/limite/services/data.service';
+import { DialogConfirmacaoComponent } from './components/limite/views/dialog-confirmacao/dialog-confirmacao.component'
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { DataService } from './components/limite/services/data.service'
     VisualizacaoComponent,
     DialogVinculacaoComponent,
     TransformTitlePipe,
-    FormatAnyPipe
+    FormatAnyPipe,
+    DialogConfirmacaoComponent
   ],
   imports: [
     BrowserModule,
